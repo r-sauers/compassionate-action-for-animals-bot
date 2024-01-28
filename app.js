@@ -7,7 +7,8 @@ import {
   MessageComponentTypes,
   ButtonStyleTypes,
 } from 'discord-interactions';
-import { VerifyDiscordRequest, DiscordRequest } from './utils.js';
+import { VerifyDiscordRequest, DiscordRequest } from './lib/utils.js';
+import { getUserImpact, USER_IMPACT_STATUS } from './lib/impact.js';
 
 // Create an express app
 const app = express();
@@ -19,7 +20,7 @@ app.use(express.json({ verify: VerifyDiscordRequest(process.env.PUBLIC_KEY) }));
 /**
  * Interactions endpoint URL where Discord will send HTTP requests
  */
-app.post('/interactions', async function (req, res) {
+app.post('/interactions', async function(req, res) {
   // Interaction type and data
   const { type, id, data } = req.body;
 
@@ -39,42 +40,47 @@ app.post('/interactions', async function (req, res) {
 
     // "trivia" command
     if (name === 'impact') {
-      // Send a message into the channel where command was triggered from
-      return res.send({
-        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-        data: {
-          // Fetches a random emoji to send from a helper function
-          content: 'Impact is unsupported right now, sorry!',
-          flags: InteractionResponseFlags.EPHEMERAL,
-        },
+      const userId = req.body.member.user.id;
+      getUserImpact(userId, (status, data) => {
+        if (status == USER_IMPACT_STATUS.OK) {
+
+          // Send a message into the channel where command was triggered from
+          res.send({
+            type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+            data: {
+              content: `Impact is unsupported right now, sorry!\nBut you have saved ${data.animals} animals!`,
+              flags: InteractionResponseFlags.EPHEMERAL,
+            },
+          });
+        }
       });
     }
 
-    // "trivia" command
-    if (name === 'trivia') {
-      // Send a message into the channel where command was triggered from
-      return res.send({
-        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-        data: {
-          // Fetches a random emoji to send from a helper function
-          content: 'Trivia is unsupported right now, sorry!',
-          flags: InteractionResponseFlags.EPHEMERAL,
-        },
-      });
-    }
-    // "recipes" command
-    if (name === 'recipes') {
-
-      return res.send({
-        type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
-        data: {
-          // Fetches a random emoji to send from a helper function
-          content: 'Recipes is unsupported right now, sorry!',
-          flags: InteractionResponseFlags.EPHEMERAL,
-        },
-      });
-    }
+  // "trivia" command
+  if (name === 'trivia') {
+    // Send a message into the channel where command was triggered from
+    return res.send({
+      type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+      data: {
+        // Fetches a random emoji to send from a helper function
+        content: 'Trivia is unsupported right now, sorry!',
+        flags: InteractionResponseFlags.EPHEMERAL,
+      },
+    });
   }
+  // "recipes" command
+  if (name === 'recipes') {
+
+    return res.send({
+      type: InteractionResponseType.CHANNEL_MESSAGE_WITH_SOURCE,
+      data: {
+        // Fetches a random emoji to send from a helper function
+        content: 'Recipes is unsupported right now, sorry!',
+        flags: InteractionResponseFlags.EPHEMERAL,
+      },
+    });
+  }
+}
 
 });
 
