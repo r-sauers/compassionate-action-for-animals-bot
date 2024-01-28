@@ -1,45 +1,24 @@
 import 'dotenv/config';
-import { getRPSChoices } from './game.js';
-import { capitalize, InstallGlobalCommands } from './utils.js';
+import { InstallGlobalCommands } from './utils.js';
 
-// Get the game choices from game.js
-function createCommandChoices() {
-  const choices = getRPSChoices();
-  const commandChoices = [];
+const TRIVIA_COMMAND = {
+  name: 'trivia',
+  description: 'Play this trivia to learn facts about veganism! This is great to prepare you for debates/conversations with people curious about veganism!',
+  type: 1,
+};
 
-  for (let choice of choices) {
-    commandChoices.push({
-      name: capitalize(choice),
-      value: choice.toLowerCase(),
-    });
-  }
+const RECIPES_COMMAND = {
+  name: 'recipes',
+  description: 'Find out what other people like to cook/bake!',
+  type: 1,
+};
 
-  return commandChoices;
+const IMPACT_COMMAND = {
+  name: 'impact',
+  description: 'Discover the impact of going vegan!',
+  type: 1,
 }
 
-// Simple test command
-const TEST_COMMAND = {
-  name: 'test',
-  description: 'Basic command',
-  type: 1,
-};
-
-// Command containing options
-const CHALLENGE_COMMAND = {
-  name: 'challenge',
-  description: 'Challenge to a match of rock paper scissors',
-  options: [
-    {
-      type: 3,
-      name: 'object',
-      description: 'Pick your object',
-      required: true,
-      choices: createCommandChoices(),
-    },
-  ],
-  type: 1,
-};
-
-const ALL_COMMANDS = [TEST_COMMAND, CHALLENGE_COMMAND];
+const ALL_COMMANDS = [TRIVIA_COMMAND, RECIPES_COMMAND];
 
 InstallGlobalCommands(process.env.APP_ID, ALL_COMMANDS);
