@@ -2,16 +2,16 @@
 
 This discord bot is for Compassionate Action for Animals, an animal rights student group at the University of Minnesota. It will provide the following features:
 * Trivia [not implemented]
- * Play trivia to have fun and learn more about veganism!
- * Helpful for preparing for outreach/debates.
- * Contains trivia on nutrition, animal welfare, and the environment.
+  * Play trivia to have fun and learn more about veganism!
+  * Helpful for preparing for outreach/debates.
+  * Contains trivia on nutrition, animal welfare, and the environment.
 * Recipes [not implemented]
- * Share recipes in your server!
- * Vote on your favorite recipes!
- * Find out the nutrition content of those recipes!
+  * Share recipes in your server!
+  * Vote on your favorite recipes!
+  * Find out the nutrition content of those recipes!
 * Impact [not implemented]
- * View your personal impact after going vegetarian/vegan! How many animals have you saved? How many trees? How much CO2?
- * View the server's impact as a whole!
+  * View your personal impact after going vegetarian/vegan! How many animals have you saved? How many trees? How much CO2?
+  * View the server's impact as a whole!
 
 ## Running app locally
 
