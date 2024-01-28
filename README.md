@@ -1,32 +1,21 @@
-# Getting Started app for Discord
+# [IN DEVELOPMENT] Compassionate Action for Animals Discord Bot
 
-This project contains a basic rock-paper-scissors-style Discord app written in JavaScript, built for the [getting started guide](https://discord.com/developers/docs/getting-started).
-
-![Demo of app](https://github.com/discord/discord-example-app/raw/main/assets/getting-started-demo.gif?raw=true)
-
-> ✨ A version of this code is also hosted **[on Glitch 🎏](https://glitch.com/~getting-started-discord)** and **[on Replit 🌀](https://replit.com/github/discord/discord-example-app)**
-
-## Project structure
-Below is a basic overview of the project structure:
-
-```
-├── examples    -> short, feature-specific sample apps
-│   ├── app.js  -> finished app.js code
-│   ├── button.js
-│   ├── command.js
-│   ├── modal.js
-│   ├── selectMenu.js
-├── .env.sample -> sample .env file
-├── app.js      -> main entrypoint for app
-├── commands.js -> slash command payloads + helpers
-├── game.js     -> logic specific to RPS
-├── utils.js    -> utility functions and enums
-├── package.json
-├── README.md
-└── .gitignore
-```
+This discord bot is for Compassionate Action for Animals, an animal rights student group at the University of Minnesota. It will provide the following features:
+* Trivia [not implemented]
+ * Play trivia to have fun and learn more about veganism!
+ * Helpful for preparing for outreach/debates.
+ * Contains trivia on nutrition, animal welfare, and the environment.
+* Recipes [not implemented]
+ * Share recipes in your server!
+ * Vote on your favorite recipes!
+ * Find out the nutrition content of those recipes!
+* Impact [not implemented]
+ * View your personal impact after going vegetarian/vegan! How many animals have you saved? How many trees? How much CO2?
+ * View the server's impact as a whole!
 
 ## Running app locally
+
+This bot is currently only run locally, please follow the instructions adapted from the [Discord Example App](https://github.com/discord/discord-example-app)
 
 Before you start, you'll need to install [NodeJS](https://nodejs.org/en/download/) and [create a Discord app](https://discord.com/developers/applications) with the proper permissions:
 - `applications.commands`
@@ -39,17 +28,17 @@ Configuring the app is covered in detail in the [getting started guide](https://
 
 First clone the project:
 ```
-git clone https://github.com/discord/discord-example-app.git
+git clone https://github.com/r-sauers/compassionate-action-for-animals-bot.git
 ```
 
 Then navigate to its directory and install dependencies:
 ```
-cd discord-example-app
+cd compassionate-action-for-animals-bot
 npm install
 ```
 ### Get app credentials
 
-Fetch the credentials from your app's settings and add them to a `.env` file (see `.env.sample` for an example). You'll need your app ID (`APP_ID`), bot token (`DISCORD_TOKEN`), and public key (`PUBLIC_KEY`).
+Fetch the credentials from your app's settings and add them to a `.env` file. You'll need your app ID (`APP_ID`), bot token (`DISCORD_TOKEN`), and public key (`PUBLIC_KEY`).
 
 Fetching credentials is covered in detail in the [getting started guide](https://discord.com/developers/docs/getting-started).
 
@@ -104,8 +93,3 @@ On the **General Information** tab, there will be an **Interactions Endpoint URL
 
 Click **Save Changes**, and your app should be ready to run 🚀
 
-## Other resources
-- Read **[the documentation](https://discord.com/developers/docs/intro)** for in-depth information about API features.
-- Browse the `examples/` folder in this project for smaller, feature-specific code examples
-- Join the **[Discord Developers server](https://discord.gg/discord-developers)** to ask questions about the API, attend events hosted by the Discord API team, and interact with other devs.
-- Check out **[community resources](https://discord.com/developers/docs/topics/community-resources#community-resources)** for language-specific tools maintained by community members.
