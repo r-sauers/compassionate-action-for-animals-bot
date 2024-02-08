@@ -11,7 +11,8 @@
     "start": "node app.js",
     "register": "node commands.js",
     "dev": "node app.js",
-    "seed": "node seed.js"
+    "seed": "node seed.js",
+    "clear": "node clear_database.js"
   },
   "author": "Ryan Sauers",
   "license": "MIT",

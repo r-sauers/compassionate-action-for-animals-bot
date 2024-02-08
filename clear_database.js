@@ -1,8 +1,6 @@
 /**
- *  Seeds the database with the pledges Ryan has made.
+ *  Drops the users and pledges tables, and recreates them.
  */
-import { VEG_STATUS } from "./definitions/users.js";
-import { generateInsertSQL } from "./lib/utils.js";
 import sqlite3 from "sqlite3";
 
 let db = new sqlite3.Database("./db/users.db", (err) => {
@@ -11,29 +9,6 @@ let db = new sqlite3.Database("./db/users.db", (err) => {
   }
   console.log("Connected to the in-memory SQLite database.");
 });
-
-const seedUsers = [
-  {
-    discord_id: "565645061526913027",
-  },
-];
-
-const seedPledges = [
-  {
-    pledger_id: 1,
-    veg_status: VEG_STATUS.VEGAN,
-    start_date: new Date(2020, 2, 31),
-    end_date: new Date(2124, 0, 1),
-  },
-];
-
-const usersValues = [];
-const pledgesValues = [];
-const usersSQL = generateInsertSQL("users", seedUsers, usersValues);
-const pledgesSQL = generateInsertSQL("pledges", seedPledges, pledgesValues);
-
-console.log("For insertion of users, using:", usersSQL);
-console.log("For insertion of pledges, using:", pledgesSQL);
 
 db.serialize(() => {
   db.run("DROP TABLE IF EXISTS users", (err) => {
@@ -69,30 +44,7 @@ db.serialize(() => {
         }
         console.log("Created Table");
       },
-    )
-    .run(usersSQL, usersValues, (err) => {
-      if (err) {
-        console.log("Failed to add user");
-        return console.error(err.message);
-      }
-      console.log("Added user");
-    })
-    .run(pledgesSQL, pledgesValues, (err) => {
-      if (err) {
-        console.log("Failed to add user");
-        return console.error(err.message);
-      }
-      console.log("Added user");
-    })
-    .all("SELECT * from users", [], (err, rows) => {
-      if (err) {
-        throw err;
-      }
-
-      rows.forEach((row) => {
-        console.log(row);
-      });
-    });
+    );
 });
 
 db.close((err) => {
